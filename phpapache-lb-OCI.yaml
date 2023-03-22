@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpapache-deployment
+spec:
+  selector:
+    matchLabels:
+      app: phpapache
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: phpapache
+    spec:
+      containers:
+      - name: phpapache  
+        image: <URL do Imagem no Registry do OCI>
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: <Nome da Chave de Segredo do OCI Registry>
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpapache-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: phpapache
