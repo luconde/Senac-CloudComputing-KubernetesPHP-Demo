@@ -14,11 +14,11 @@ spec:
     spec:
       containers:
       - name: phpapache  
-        image: <URL do Imagem no Registry do OCI>
+        image: <Insira a Url do repositório da imagem>
         ports:
         - containerPort: 80
       imagePullSecrets:
-      - name: <Nome da Chave de Segredo do OCI Registry>
+      - name: ocirsecret
 ---
 apiVersion: v1
 kind: Service
